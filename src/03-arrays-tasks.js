@@ -359,21 +359,26 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-/*
+function sortDigitNamesByNumericOrder(arr) {
   const items = new Map([
-    [ 'one', 1 ],
-    [ 'two', 2 ],
-    [ 'three', 3 ],
-    [ 'four', 4 ],
-    [ 'five', 5 ],
-    [ 'six', 6 ],
-    [ 'seven', 7 ],
-    [ 'eight', 8 ],
-    [ 'nine', 9 ]
-]);
-*/
-  throw new Error('Not implemented');
+    ['zero', 0],
+    ['one', 1],
+    ['two', 2],
+    ['three', 3],
+    ['four', 4],
+    ['five', 5],
+    ['six', 6],
+    ['seven', 7],
+    ['eight', 8],
+    ['nine', 9],
+  ]);
+
+  arr.sort((a, b) => {
+    if (items.get(a) < items.get(b)) { return -1; }
+    if (items.get(a) > items.get(b)) { return 1; }
+    return 0;
+  });
+  return arr;
 }
 
 /**
@@ -470,36 +475,26 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  /*
+function sortCitiesArray(arr) {
   const array = arr.sort((a, b) => {
     const nameA = a.country;
     const nameB = b.country;
     if (nameA < nameB) {
       return -1;
-    }
-    if (nameA > nameB) {
+    } if (nameA > nameB) {
       return 1;
-    }
-    if (nameA > nameB) {
-      arr.sort((c, d) => {
-        const nameC = c.city;
-        const nameD = d.city;
-        if (nameC < nameD) {
-          return -1;
-        }
-        if (nameC > nameD) {
-          return 1;
-        }
-        return 0;
-      });
+    } if (nameA === nameB) {
+      if (a.city < b.city) {
+        return -1;
+      }
+      if (a.city > b.city) {
+        return 1;
+      }
       return 0;
     }
+    return 0;
   });
-
   return array;
-  */
-  throw new Error('Not implemented');
 }
 
 /**
@@ -520,8 +515,9 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  return Array(n).fill(0).map((elem, i) => Array(n)
+    .fill(0).map((elem2, j) => (1 - Math.min(Math.abs(i - j), 1))));
 }
 
 /**
@@ -624,6 +620,10 @@ function selectMany(/* arr, childrenSelector */) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(/* arr, indexes */) {
+  /*
+  const array = arr.reduce((acc, val) => acc.concat(val), []);
+  return array[indexes[indexes.length - 1]];
+  */
   throw new Error('Not implemented');
 }
 
